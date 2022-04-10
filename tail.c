@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "error.h"
 
@@ -23,7 +24,7 @@ int main(int argc, char const *argv[]) {
     if (argc >= 2) { // není zadý přepínač pouze soubor
         printf("%s %s\n", argv[0], argv[1]);//!test
         for (int i = 1; i < argc; i++) {
-            
+            bool valid_arg = false;
             if (argv[i][0] == '-' && argv[i][1] == 'n') {
                 printf("hledám %d \n",i);
                 if (argv[i][2] != '\0' || i >= argc) {
@@ -43,6 +44,7 @@ int main(int argc, char const *argv[]) {
                     }
                 }
                 n_line = atoi(argv[i]);
+                valid_arg = true;
                 if (i >= argc-1) {
                     i = argc;
                 }
@@ -52,16 +54,25 @@ int main(int argc, char const *argv[]) {
                     if (argv[i][j] == '.') {
                         printf("nalezen soubor\n");//!test
                         soubor = argv[i];
+                        valid_arg = true;
                         break;
                     }
                 }
             }
+            if (!valid_arg) {
+                error_exit("Argument číslo %d (\"%s\") je nevalidní\n",i+1, argv[i]);
+            }
         }
     }
-    printf("vypis:");
+    FILE* f;
+    printf("vypis:");//!tetst
     if (soubor == NULL){
-        soubor = "stdin";
-    }
+        f = stdin;
+    } else {
+        f = fopen(soubor,"r");
+        if (f == NULL) {
+            error_exit("Soubor \"%s\"se nepodařilo otevřít",soubor);
+        }
     
     printf("%s\n", soubor);
     printf("%d\n",n_line);
