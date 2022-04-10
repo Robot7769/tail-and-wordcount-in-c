@@ -1,0 +1,4 @@
+*.o
+tail
+wordcount
+*.txt
