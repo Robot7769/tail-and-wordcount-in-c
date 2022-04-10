@@ -1,7 +1,7 @@
 /**
  * @file tail.c
  * @author Jan Škrabal (xskrab12)-FIT
- * @brief IJC-DU2 Program tail tiskne posleních n řádků souboru
+ * @brief IJC-DU2 Program tail tiskne posleních n řádků souboru  
  * @date 2022-03-23
  * 
  * @copyright Copyright (c) 2022
@@ -78,12 +78,14 @@ int main(int argc, char const *argv[]) {
     size_t delka = 0;
     long n_radek = 0;
 
-    n_radek = getline(&radek, &delka, f);
-    printf("%s", radek);//!tetst
-    //printf("L: %ld\n",delka);//!tetst
-    //printf("N: %ld\n",n_radek);//!tetst
-    n_radek = getline(&radek, &delka, f);
-    printf("%s", radek);//!tetst
+    for (size_t i = 0;EOF != (n_radek = getline(&radek, &delka, f)) ; i++) {
+        printf("%s", radek);//!tetst
+        //n",delka);//!tetst
+        //printf("N: %ld\n",n_radek);//!tetst
+    }
+    
+    //n_radek = getline(&radek, &delka, f);
+    //printf("%s", radek);//!tetst
     //printf("L: %ld\n",delka);//!tetst
     //printf("N: %ld\n",n_radek);//!tetst
     
