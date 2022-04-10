@@ -1,7 +1,7 @@
 /**
  * @file tail.c
  * @author Jan Škrabal (xskrab12)-FIT
- * @brief IJC-DU2 Program tail tiskne posleních n řádků souboru  
+ * @brief IJC-DU2 Program tail tiskne posleních n řádků souboru
  * @date 2022-03-23
  * 
  * @copyright Copyright (c) 2022
@@ -17,7 +17,7 @@
 
 int main(int argc, char const *argv[]) {
     
-    char const *soubor = NULL;
+    char const *soubor = NULL; //? free????
     int n_line = 10;
 
     printf("%d\n", argc);//!test
@@ -76,24 +76,37 @@ int main(int argc, char const *argv[]) {
     }
     char *radek = NULL;
     size_t delka = 0;
-    long n_radek = 0;
-
-    for (size_t i = 0;EOF != (n_radek = getline(&radek, &delka, f)) ; i++) {
-        printf("%s", radek);//!tetst
-        //n",delka);//!tetst
-        //printf("N: %ld\n",n_radek);//!tetst
+    int **vypis = (int **) malloc(n_line * sizeof(int *));
+    if (vypis == NULL) {
+        fclose(f);
+        error_exit("Nrpodařilase alokace",0);
     }
-    
+
+    int pos = 0;
+    while (EOF != getline(&radek, &delka, f)) {
+        printf("%s", radek);//!tetst
+        vypis[pos] = radek;
+        //printf("L: %ld\n",delka);//!tetst
+        if (pos < n_line) {
+            pos++;
+        } else {
+            pos = 0;
+        }
+    }
+    printf("pos: %d\n",pos);
     //n_radek = getline(&radek, &delka, f);
     //printf("%s", radek);//!tetst
     //printf("L: %ld\n",delka);//!tetst
-    //printf("N: %ld\n",n_radek);//!tetst
     
     
     //printf("%s\n", soubor);//!tetst
     //printf("%d\n",n_line);//!tetst
     
     
-
+    fclose(f);
+    free(radek);
+    free(*vypis);
+    free(vypis);
+    //? free(soubor); // bacha může být NULL
     return 0;
 }
