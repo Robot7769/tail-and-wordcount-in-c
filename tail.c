@@ -43,9 +43,7 @@ int main(int argc, char const *argv[]) {
                     }
                 }
                 n_line = atoi(argv[i]);
-                if (i < argc-1) {
-                    i++;
-                } else {
+                if (i >= argc-1) {
                     i = argc;
                 }
                 
