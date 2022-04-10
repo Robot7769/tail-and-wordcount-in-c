@@ -65,7 +65,7 @@ int main(int argc, char const *argv[]) {
         }
     }
     FILE* f;
-    printf("vypis:");//!tetst
+    printf("vypis:\n");//!tetst
     if (soubor == NULL){
         f = stdin;
     } else {
@@ -73,9 +73,25 @@ int main(int argc, char const *argv[]) {
         if (f == NULL) {
             error_exit("Soubor \"%s\"se nepodařilo otevřít",soubor);
         }
+    }
+    char *radek = NULL;
+    size_t delka = 0;
+    long n_radek = 0;
+
+    n_radek = getline(&radek, &delka, f);
+    printf("%s", radek);//!tetst
+    //printf("L: %ld\n",delka);//!tetst
+    //printf("N: %ld\n",n_radek);//!tetst
+    n_radek = getline(&radek, &delka, f);
+    printf("%s", radek);//!tetst
+    //printf("L: %ld\n",delka);//!tetst
+    //printf("N: %ld\n",n_radek);//!tetst
     
-    printf("%s\n", soubor);
-    printf("%d\n",n_line);
     
+    //printf("%s\n", soubor);//!tetst
+    //printf("%d\n",n_line);//!tetst
+    
+    
+
     return 0;
 }
