@@ -21,23 +21,23 @@ int main(int argc, char const *argv[]) {
     char const *soubor = NULL; //? free????
     int n_line = 10;
 
-    printf("%d\n", argc);//!test
+    //printf("%d\n", argc);//!test
     if (argc >= 2) { // není zadý přepínač pouze soubor
-        printf("%s %s\n", argv[0], argv[1]);//!test
+        //printf("%s %s\n", argv[0], argv[1]);//!test
         for (int i = 1; i < argc; i++) {
             bool valid_arg = false;
             if (argv[i][0] == '-' && argv[i][1] == 'n') {
-                printf("hledám %d \n",i);
+                //printf("hledám %d \n",i);//!test
                 if (argv[i][2] != '\0' || i >= argc) {
                     error_exit("přepínač -n je správně zadaný\n",0);
                 }
-                printf("nalezen přepínač\n");//!test
+                //printf("nalezen přepínač\n");//!test
                 if (i < argc-1) {
                     i++;
                 } else {
                     error_exit("u přepínač -n nebyl zadan parametr\n",0);
                 }
-                printf("%s \n",argv[i]);//!test
+                //printf("%s \n",argv[i]);//!test
                 for (size_t y = 0; y < strlen(argv[i]); y++)
                 {
                     if (!(argv[i][y] >= '0' && argv[i][y] <= '9')){
@@ -53,7 +53,7 @@ int main(int argc, char const *argv[]) {
             } else {
                 for (size_t j = 0; j < strlen(argv[i]); j++) {
                     if (argv[i][j] == '.') {
-                        printf("nalezen soubor\n");//!test
+                        //printf("nalezen soubor\n");//!test
                         soubor = argv[i];
                         valid_arg = true;
                         break;
@@ -66,13 +66,12 @@ int main(int argc, char const *argv[]) {
         }
     }
     FILE* f;
-    printf("vypis:\n");//!tetst
     if (soubor == NULL){
         f = stdin;
     } else {
         f = fopen(soubor,"r");
         if (f == NULL) {
-            error_exit("Soubor \"%s\"se nepodařilo otevřít",soubor);
+            error_exit("Soubor \"%s\"se nepodařilo otevřít\n",soubor);
         }
     }
     char *radek = NULL;
@@ -80,7 +79,7 @@ int main(int argc, char const *argv[]) {
     char **vypis = (char **) malloc((n_line+1) * sizeof(char *));
     if (vypis == NULL) {
         fclose(f);
-        error_exit("Nrpodařilase alokace",0);
+        error_exit("Nrpodařilase alokace\n",0);
     }
 
     int pos = 0;
@@ -93,16 +92,18 @@ int main(int argc, char const *argv[]) {
         //printf("L: %ld\n",delka);//!tetst
         //printf("%s", radek);//!tetst
         //printf("%d- %s",pos, vypis[pos]);//!tetst
-        if (pos < n_line-1) {
-            pos++;
-        } else {
-            pos = 0;
-        }
+        //if (pos < n_line-1) {
+        //    pos++;
+        //} else {
+        //    pos = 0;
+        //}
+        pos = (pos +1) % n_line;
     }
 
     //!výpis
+    //printf("vypis:\n");//!tetst
     for (int i = 0; i < n_line; i++) {
-        printf("%d-%s",i, vypis[((pos + i)%n_line)]);
+        printf("%s", vypis[((pos + i)%n_line)]);
     }
     
     //n_radek = getline(&radek, &delka, f);
