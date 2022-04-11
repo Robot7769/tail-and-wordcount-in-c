@@ -8,6 +8,7 @@
  * 
  */
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -76,7 +77,7 @@ int main(int argc, char const *argv[]) {
     }
     char *radek = NULL;
     size_t delka = 0;
-    int **vypis = (int **) malloc(n_line * sizeof(int *));
+    char **vypis = (char **) malloc((n_line+1) * sizeof(char *));
     if (vypis == NULL) {
         fclose(f);
         error_exit("Nrpodařilase alokace",0);
@@ -84,16 +85,25 @@ int main(int argc, char const *argv[]) {
 
     int pos = 0;
     while (EOF != getline(&radek, &delka, f)) {
-        printf("%s", radek);//!tetst
         vypis[pos] = radek;
+        //printf("%d- %s",pos+1, vypis[pos+1]);//!tetst
         //printf("L: %ld\n",delka);//!tetst
-        if (pos < n_line) {
+        printf("%s", radek);//!tetst
+        printf("%d- %s",pos, vypis[pos]);//!tetst
+        if (pos < n_line-1) {
             pos++;
         } else {
             pos = 0;
         }
     }
     printf("pos: %d\n",pos);
+    printf("-%s", vypis[0]);
+    printf("-%s", vypis[1]);
+    printf("-%s", vypis[2]);
+    for (int i = 0; i < n_line; i++) {
+        printf("%d-%s",i, vypis[((pos + i)%10)]);
+    }
+    
     //n_radek = getline(&radek, &delka, f);
     //printf("%s", radek);//!tetst
     //printf("L: %ld\n",delka);//!tetst
@@ -105,7 +115,6 @@ int main(int argc, char const *argv[]) {
     
     fclose(f);
     free(radek);
-    free(*vypis);
     free(vypis);
     //? free(soubor); // bacha může být NULL
     return 0;
