@@ -84,24 +84,25 @@ int main(int argc, char const *argv[]) {
     }
 
     int pos = 0;
+    
+
     while (EOF != getline(&radek, &delka, f)) {
         vypis[pos] = radek;
+        radek = NULL;
         //printf("%d- %s",pos+1, vypis[pos+1]);//!tetst
         //printf("L: %ld\n",delka);//!tetst
-        printf("%s", radek);//!tetst
-        printf("%d- %s",pos, vypis[pos]);//!tetst
+        //printf("%s", radek);//!tetst
+        //printf("%d- %s",pos, vypis[pos]);//!tetst
         if (pos < n_line-1) {
             pos++;
         } else {
             pos = 0;
         }
     }
-    printf("pos: %d\n",pos);
-    printf("-%s", vypis[0]);
-    printf("-%s", vypis[1]);
-    printf("-%s", vypis[2]);
+
+    //!výpis
     for (int i = 0; i < n_line; i++) {
-        printf("%d-%s",i, vypis[((pos + i)%10)]);
+        printf("%d-%s",i, vypis[((pos + i)%n_line)]);
     }
     
     //n_radek = getline(&radek, &delka, f);
@@ -119,3 +120,5 @@ int main(int argc, char const *argv[]) {
     //? free(soubor); // bacha může být NULL
     return 0;
 }
+
+//!test by valgrind 
