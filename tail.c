@@ -18,7 +18,7 @@
 
 int main(int argc, char const *argv[]) {
     
-    char const *soubor = NULL; //? free????
+    char const *soubor = NULL;
     int n_line = 10;
 
     //printf("%d\n", argc);//!test
@@ -114,11 +114,15 @@ int main(int argc, char const *argv[]) {
     //printf("%s\n", soubor);//!tetst
     //printf("%d\n",n_line);//!tetst
     
-    
-    fclose(f);
-    free(radek);
-    free(vypis);
-    //? free(soubor); // bacha může být NULL
+    if (f != NULL) {
+        fclose(f);
+    }
+    if (radek != NULL) {
+        free(radek);
+    }
+    if (vypis != NULL) {
+        free(vypis);
+    }
     return 0;
 }
 
