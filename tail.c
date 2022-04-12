@@ -21,23 +21,18 @@ int main(int argc, char const *argv[]) {
     char const *soubor = NULL;
     int n_line = 10;
 
-    //printf("%d\n", argc);//!test
     if (argc >= 2) { // není zadý přepínač pouze soubor
-        //printf("%s %s\n", argv[0], argv[1]);//!test
         for (int i = 1; i < argc; i++) {
             bool valid_arg = false;
             if (argv[i][0] == '-' && argv[i][1] == 'n') {
-                //printf("hledám %d \n",i);//!test
                 if (argv[i][2] != '\0' || i >= argc) {
                     error_exit("přepínač -n je správně zadaný\n",0);
                 }
-                //printf("nalezen přepínač\n");//!test
                 if (i < argc-1) {
                     i++;
                 } else {
                     error_exit("u přepínač -n nebyl zadan parametr\n",0);
                 }
-                //printf("%s \n",argv[i]);//!test
                 for (size_t y = 0; y < strlen(argv[i]); y++)
                 {
                     if (!(argv[i][y] >= '0' && argv[i][y] <= '9')){
@@ -49,11 +44,9 @@ int main(int argc, char const *argv[]) {
                 if (i >= argc-1) {
                     i = argc;
                 }
-                
             } else {
                 for (size_t j = 0; j < strlen(argv[i]); j++) {
                     if (argv[i][j] == '.') {
-                        //printf("nalezen soubor\n");//!test
                         soubor = argv[i];
                         valid_arg = true;
                         break;
@@ -86,7 +79,6 @@ int main(int argc, char const *argv[]) {
         vypis[i] = NULL;
     }
     
-    
     int pos = 0;
     
     while (EOF != getline(&radek, &delka, f)) {
@@ -95,33 +87,15 @@ int main(int argc, char const *argv[]) {
         } 
         vypis[pos] = radek;
         radek = NULL;
-        //printf("%d- %s",pos+1, vypis[pos+1]);//!tetst
-        //printf("L: %ld\n",delka);//!tetst
-        //printf("%s", radek);//!tetst
-        //printf("%d- %s",pos, vypis[pos]);//!tetst
-        //if (pos < n_line-1) {
-        //    pos++;
-        //} else {
-        //    pos = 0;
-        //}
         pos = (pos +1) % n_line;
     }
 
     //!výpis
-    //printf("vypis:\n");//!tetst
     for (int i = 0; i < n_line; i++) {
         if (vypis[((pos + i)%n_line)] != NULL) {
             printf("%s", vypis[((pos + i)%n_line)]);
         }
     }
-    
-    //n_radek = getline(&radek, &delka, f);
-    //printf("%s", radek);//!tetst
-    //printf("L: %ld\n",delka);//!tetst
-    
-    
-    //printf("%s\n", soubor);//!tetst
-    //printf("%d\n",n_line);//!tetst
     
     if (f != NULL) {
         fclose(f);
@@ -140,5 +114,3 @@ int main(int argc, char const *argv[]) {
     }
     return 0;
 }
-
-//!test by valgrind 
