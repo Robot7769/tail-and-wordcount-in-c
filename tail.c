@@ -76,16 +76,23 @@ int main(int argc, char const *argv[]) {
     }
     char *radek = NULL;
     size_t delka = 0;
-    char **vypis = (char **) malloc((n_line+1) * sizeof(char *));
+    char **vypis = (char **) malloc((n_line) * sizeof(char *));
     if (vypis == NULL) {
         fclose(f);
         error_exit("Nrpodařilase alokace\n",0);
     }
 
+    for (int i = 0; i < n_line; i++) {
+        vypis[i] = NULL;
+    }
+    
+    
     int pos = 0;
     
-
     while (EOF != getline(&radek, &delka, f)) {
+        if (vypis[pos] != NULL) {
+            free(vypis[pos]);
+        } 
         vypis[pos] = radek;
         radek = NULL;
         //printf("%d- %s",pos+1, vypis[pos+1]);//!tetst
@@ -103,7 +110,9 @@ int main(int argc, char const *argv[]) {
     //!výpis
     //printf("vypis:\n");//!tetst
     for (int i = 0; i < n_line; i++) {
-        printf("%s", vypis[((pos + i)%n_line)]);
+        if (vypis[((pos + i)%n_line)] != NULL) {
+            printf("%s", vypis[((pos + i)%n_line)]);
+        }
     }
     
     //n_radek = getline(&radek, &delka, f);
@@ -120,6 +129,12 @@ int main(int argc, char const *argv[]) {
     if (radek != NULL) {
         free(radek);
     }
+    for (int i = 0; i < n_line; i++) {
+        if (vypis[i] != NULL) {
+            free(vypis[i]);
+        }    
+    }
+    
     if (vypis != NULL) {
         free(vypis);
     }
