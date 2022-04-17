@@ -1,7 +1,7 @@
 /**
  * @file htab_hash_function.c
  * @author Jan Škrabal (xskrab12)-FIT
- * @brief IJC-DU2 Tabulka
+ * @brief IJC-DU2 Hash funkce
  * @date 2022-03-23
  * 
  * @copyright Copyright (c) 2022
