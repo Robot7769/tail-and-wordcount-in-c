@@ -19,7 +19,7 @@ htab_t *htab_init(size_t n) {
         return NULL;
     }
     tab->arr_size = n;
-    tab->arr_ptr = calloc(n, sizeof(htab_item_t*));
+    tab->arr_ptr = calloc(n, sizeof(htab_item_t*));     //? co se stane když zavolám htab_init(0); ????!!!!
     if (tab->arr_ptr == NULL) {
         free(tab);
         warning_msg("Neuspěsná alokace arr_ptr v htab_init",0);
