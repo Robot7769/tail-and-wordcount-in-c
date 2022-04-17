@@ -13,7 +13,7 @@
 
 size_t htab_bucket_count(const htab_t * t) {
     if (t == NULL) {
-        error_exit("htab_t * t je NULL",0);
+        error_exit("htab_t * t je NULL, modulu htab_bucket_count",0);
     }
     return t->arr_size;
 }
