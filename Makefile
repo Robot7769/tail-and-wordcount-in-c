@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -g -std=c11 -pedantic -Wall -Wextra #-O2y #-m32
+CPPFLAGS = -std=c++17 -pedantic -Wall	#CC = g++ 
 LDLIBS = -lm #-m32
 
 .PHONY: all zip clean

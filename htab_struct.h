@@ -16,12 +16,12 @@
 struct htab {
     size_t size;
     size_t arr_size;
-    struct htab_item **arr_ptr;
+    htab_item_t **arr_ptr;
 };
 
-struct htab_item {
+typedef struct htab_item {
     htab_pair_t data;
     struct htab_item *next;
-};
+}htab_item_t;
 
 #endif
