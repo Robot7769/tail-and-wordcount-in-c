@@ -20,9 +20,10 @@ htab_pair_t * htab_find(htab_t * t, htab_key_t key) {
         return NULL;
     }
 
+    size_t j = 0;
     for (size_t i = 0; i < t->arr_size; i++) {
         htab_item_t *tmp = t->arr_ptr[i];
-        for (size_t j = 0; j < t->size; j++) {
+        for (; j < t->size; j++) {
             if (tmp->data->key == key) {
                 return tmp->data;
             }
