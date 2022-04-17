@@ -1,10 +1,7 @@
 /**
  * @file libhtab.h
- * @author Jan Škrabal (xskrab12)-FIT
  * @brief IJC-DU2 Hlavičkový soubor
  * @date 2022-03-23
- * 
- * @copyright Copyright (c) 2022
  * 
  */
 // htab.h -- rozhraní knihovny htab (řešení IJC-DU2)
@@ -16,6 +13,8 @@
 
 #include <string.h>     // size_t
 #include <stdbool.h>    // bool
+
+#include <stdint.h>     // unint32
 
 // Tabulka:
 struct htab;    // neúplná deklarace struktury - uživatel nevidí obsah
