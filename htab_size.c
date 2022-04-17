@@ -9,7 +9,11 @@
  */
 
 #include "htab_struct.h"
+#include "error.h"
 
 size_t htab_size(const htab_t * t) {
+    if (t == NULL) {
+        error_exit("htab_t * t je NULL",0);
+    }
     return t->size;
 }
