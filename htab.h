@@ -31,8 +31,6 @@ typedef struct htab_pair {
 } htab_pair_t;                  // typedef podle zadání
 
 struct htab_item;
-typedef struct htab_item htab_item_t;
-
 
 // Rozptylovací (hash) funkce (stejná pro všechny tabulky v programu)
 // Pokud si v programu definujete stejnou funkci, použije se ta vaše.

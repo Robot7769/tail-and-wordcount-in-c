@@ -13,7 +13,7 @@
 struct htab {
     size_t size;
     size_t arr_size;
-    htab_item_t **arr_ptr;
+    struct htab_item **arr_ptr;
 };
 
 struct htab_item {
