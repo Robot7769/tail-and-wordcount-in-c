@@ -13,7 +13,8 @@
 
 htab_pair_t * htab_find(htab_t * t, htab_key_t key) {
     if (t == NULL) {
-        error_exit("htab_t * t je NULL, modul htab_find",0);
+        warning_msg("htab_t * t je NULL, modul htab_find",0);
+        return NULL;
     }
     if (t->arr_size == 0 || t->arr_ptr == NULL) {
         return NULL;
