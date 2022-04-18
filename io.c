@@ -11,7 +11,6 @@
 #include <stdio.h>
 
 int read_word(char *s, int max, FILE *f) {
-    
     char word[max];
     for (int i = 0; i < max-1; i++) {
         int znak = fgetc(f);
