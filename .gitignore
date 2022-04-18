@@ -3,3 +3,5 @@
 tail
 wordcount
 *.txt
+*.a
+*.so
