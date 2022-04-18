@@ -13,15 +13,16 @@
 #ifndef __HTAB_STRUCT_H__
 #define __HTAB_STRUCT_H__
 
+typedef struct htab_item {
+    htab_pair_t *data;
+    struct htab_item *next;
+}htab_item_t;
+
 struct htab {
     size_t size;
     size_t arr_size;
     htab_item_t **arr_ptr;
 };
 
-typedef struct htab_item {
-    htab_pair_t *data;
-    struct htab_item *next;
-}htab_item_t;
 
 #endif
