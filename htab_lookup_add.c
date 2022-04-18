@@ -9,6 +9,7 @@
  */
 
 #include "htab_struct.h"
+#include "error.h"
 #include <stdlib.h>
 
 htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
@@ -18,9 +19,11 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
     }
     size_t index = htab_hash_function(key);
     htab_item_t *tmp = t->arr_ptr[index];
-    for (size_t j = 0; j < t->size; j++) {
+    for (size_t j = 0; j < t->size; j++) {  //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
         if (tmp->next != NULL) {
             tmp = tmp->next;
+        } else {
+            break;
         }
     }
     htab_item_t *item = malloc(sizeof(htab_item_t));
@@ -33,9 +36,9 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
     item->next = NULL;
     tmp->next = item;
     if (++(t->size) / t->arr_size > AVG_LEN_MAX) {
-        htab_resize(t,++(t->size));
+        htab_resize(t,(t->size)*2);
     } else {
         (t->size)++;
     }
-    return item;
+    return item->data;
 }

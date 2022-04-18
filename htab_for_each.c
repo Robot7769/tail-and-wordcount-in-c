@@ -9,6 +9,7 @@
  */
 
 #include "htab_struct.h"
+#include "error.h"
 
 void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data)) {
     if (t == NULL) {
@@ -19,11 +20,15 @@ void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data)) {
     }
 
     size_t j = 0;
-    for (size_t i = 0; i < t->arr_size; i++) {
+    for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
         htab_item_t *tmp = t->arr_ptr[i];
         for (; j < t->size; j++) {
             f(tmp->data);
-            tmp = tmp->next;
+            if (tmp->next != NULL) {
+                tmp = tmp->next;
+            } else {
+                break;
+            }
         }
     }
     return;

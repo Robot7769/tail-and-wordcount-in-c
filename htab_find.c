@@ -29,6 +29,8 @@ htab_pair_t * htab_find(htab_t * t, htab_key_t key) {
             }
             if (tmp->next != NULL) {
                 tmp = tmp->next;
+            } else {
+                break;
             }
         }
     }
