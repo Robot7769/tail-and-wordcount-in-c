@@ -21,10 +21,12 @@ htab_pair_t * htab_find(htab_t * t, htab_key_t key) {
     }
 
     size_t j = 0;
-    for (size_t i = 0; i < t->arr_size; i++) {
-        htab_item_t *tmp = t->arr_ptr[i];
-        for (; j < t->size; j++) {
-            if (tmp->data->key == key) {
+    size_t index = (htab_hash_function(key) % t->arr_size);
+    //printf("find_index: %ld\n", index);
+    htab_item_t *tmp = t->arr_ptr[index];
+    for (; j < t->size; j++) {
+        if (tmp != NULL) {
+            if (strcmp(tmp->data->key, key) == 0) {
                 return tmp->data;
             }
             if (tmp->next != NULL) {

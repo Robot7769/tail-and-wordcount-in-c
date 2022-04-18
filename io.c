@@ -9,26 +9,44 @@
  */
 
 #include <stdio.h>
+#include <stdbool.h>
+#include "error.h"
+
+bool err_long_word = false;
 
 int read_word(char *s, int max, FILE *f) {
-    char word[max];
+    //printf("čtení slova start\n");
+    //char word[max];
     for (int i = 0; i < max-1; i++) {
+        //printf("for\n");
         int znak = fgetc(f);
-        if (znak == EOF) {
-            s = word;
-            return EOF;
-        }
-        if ((char)znak != ' ' || (char)znak != '\n' || (char)znak != '\t') {
-            word[i] = (char)znak;
-        }
-        if ((char)znak == '\0') {
-            s = word;
+        //printf("znak_cislo: %d\n",znak);
+        if ((char)znak == '\0' || (char)znak == ' ' || (char)znak == '\n' || (char)znak == '\t') {
+            //s[i+1] = '\0';
+            //printf("vracím slovo-konec: %s\n", s);
+            //s = word;
             return i+1;
         }
+        if (znak == EOF) {
+            //s = word;
+            //s[i] = '\0';
+            //printf("vracím slovo-EOF: %s\n", s);
+            return EOF;
+        }
+        
+        s[i] = (char)znak;
+        
     }
-    s = word;
+    //s[max] = '\0';
+    printf("vracím slovo-chyba: %s\n", s);
+    if (!err_long_word) {
+        err_long_word = true;
+        warning_msg("slovo je moc dlouhé\n",0);
+    }
+
+    //s = word;
     //!error delší slovo
-    return -1;
+    return max; //? EOF
 
 
     //TODO

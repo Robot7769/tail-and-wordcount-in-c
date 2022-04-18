@@ -12,7 +12,7 @@
 #include "error.h"
 #include <stdlib.h>
 
-void htab_clear(htab_t * t) {
+void htab_clear(htab_t * t) { //! nemá mazet celou arr_ptr ale jen smazat slova
     if (t == NULL) {
         warning_msg("htab_t * t je NULL, modul htab_clear",0);
         return;

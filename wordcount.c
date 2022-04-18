@@ -10,25 +10,44 @@
 
 #include "htab.h"
 #include "io.c"
+#include <stdlib.h>
+#include <stdio.h>
+
+#define HTAB_SIZE 20
 
 void print_htab(htab_pair_t *data) {
-    printf("%s\t%d\n",data->key,data->value);
+    fprintf(stdout, "%s\t%d\n",data->key,data->value);
 }
 
 int main() {
-    printf("START\n");
-    htab_t *tab = htab_init(150);
-    printf("Htab init\n");
+    //fprintf(stdout,"START\n");
+    htab_t *tab = htab_init(HTAB_SIZE);
+    //fprintf(stdout,"Htab init\n");
     FILE *file = stdin;
     char word[127];  
-    printf("read_word\n");
-    while (read_word(word,127,file) != EOF) {
+    //fprintf(stdout,"read_word\n");
+    int size;
+
+    while (EOF != (size = read_word(word,127,file))) {
+        //printf("dostal jsem slovo: %s\n", word);
+        //fprintf(stdout,"čtení\n");
         htab_pair_t *data = htab_lookup_add(tab,word);
-        (data->value)++;
-        printf("data val ++\n");
+        //printf("ptr: %p -data\n", (void *) data);
+        //printf("\n%s slovo\n", data->key);
+        data->value += 1;
+        //printf("%d val\n", data->value);
+        
+        //fprintf(stdout,"data val ++\n");
+        for (int i = 0; i < size; i++){
+            word[i] = '\0';
+        }
+        
+        
     }
-    printf("write\n");
+    //fprintf(stdout,"size: %ld, arr_size: %ld\n",htab_size(tab),htab_bucket_count(tab) );
+    //fprintf(stdout,"write\n");
     htab_for_each(tab, &print_htab);
-    printf("KONEC\n");
+    //fprintf(stdout,"KONEC\n");
+    htab_free(tab);
     return 0;
 }

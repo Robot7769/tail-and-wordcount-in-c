@@ -18,16 +18,23 @@ void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data)) {
     if (t->arr_size == 0 || t->arr_ptr == NULL) {
         return;
     }
-
     size_t j = 0;
     for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
         htab_item_t *tmp = t->arr_ptr[i];
-        for (; j < t->size; j++) {
-            f(tmp->data);
-            if (tmp->next != NULL) {
-                tmp = tmp->next;
-            } else {
-                break;
+        //printf("each-1\n");
+        if (t->arr_ptr[i] != NULL) {
+            //printf(" --each-- ");
+            for (; j < t->size; j++) {
+                //printf("each00\n");
+                if (tmp->data != NULL) {
+                    //printf("each01\n");
+                    f(tmp->data);
+                }
+                if (tmp->next != NULL) {
+                    tmp = tmp->next;
+                } else {
+                    break;
+                }
             }
         }
     }
