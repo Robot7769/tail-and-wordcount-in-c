@@ -3,7 +3,7 @@
 tail
 wordcount
 wordcount-dynamic
-wordcount++
+wordcountCC
 *.txt
 *.a
 *.so
