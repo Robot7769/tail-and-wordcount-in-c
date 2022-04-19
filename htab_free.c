@@ -14,6 +14,11 @@
 void htab_free(htab_t * t) {
     if (t != NULL) {
         htab_clear(t);
-        free(t);
+        if (t->arr_ptr != NULL) {
+            free(t->arr_ptr);
+        }
+        if (t != NULL) {
+            free(t);
+        }
     }
 }
