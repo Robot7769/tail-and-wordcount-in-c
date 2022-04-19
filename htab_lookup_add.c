@@ -109,5 +109,5 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
         printf("call resize\n");
         htab_resize(t,(t->size)*2);
     }
-    return tmp->data;
+    return tmp->next->data;
 }
