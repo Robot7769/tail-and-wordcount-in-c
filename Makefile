@@ -1,9 +1,7 @@
 EXECUTABLE = tail wordcount wordcount-dynamic libhtab.a libhtab.so
 CC = gcc
 CFLAGS = -g -std=c11 -pedantic -Wall -Wextra #-O2y #-m32
-#CPPFLAGS = -std=c++17 -pedantic -Wall	#CC = g++ 
 MODULES = htab_bucket_count.o htab_clear.o htab_erase.o htab_find.o htab_for_each.o htab_free.o htab_hash_function.o htab_init.o htab_lookup_add.o htab_resize.o htab_size.o
-LIBS = htab_struct.h 
 
 .PHONY: all zip clean
 
@@ -34,8 +32,11 @@ wordcount.o: htab.h wordcount.c io.c
 tail: tail.o error.o 
 	$(CC) tail.o error.o -o tail
 
+wordcount++: wordcount-.cc
+	g++ std=c++17 -pedantic -Wall-O2 -o $@ 
+
 wordcount: wordcount.c  io.c libhtab.a  htab_struct.h htab.h error.h
-	$(CC) -o $@ -static wordcount.c -L. -lhtab
+	$(CC) -o $@  wordcount.c -L. -lhtab
 
 wordcount-dynamic: wordcount.o libhtab.so  htab_struct.h htab.h error.h
 	$(CC) -o $@ wordcount.o error.o -L. -lhtab
