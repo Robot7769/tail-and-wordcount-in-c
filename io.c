@@ -41,6 +41,7 @@ int read_word(char *s, int max, FILE *f) {
         }
         
         s[i] = (char)znak;
+        s[i+1] = '\0';
         
     }
     //s[max] = '\0';
