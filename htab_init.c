@@ -13,6 +13,10 @@
 #include "error.h"
 
 htab_t *htab_init(size_t n) {
+    if (n < 1) {
+        warning_msg("Moc malá tabulka v htab_init",0);
+        return NULL;
+    }
     htab_t *tab = (htab_t *) calloc(1, sizeof(htab_t));
     if (tab == NULL) {
         warning_msg("Neuspěsná alokace tabulky v htab_init",0);

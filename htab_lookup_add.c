@@ -67,11 +67,14 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
     tmp->next->data = malloc(sizeof(htab_pair_t));
     if (tmp->next->data == NULL) {
         warning_msg("Neuspěsná alokace htab_pair_t v htab_lookup_add",0);
+        free(tmp->next);
         return NULL;
     }
     tmp->next->data->key = malloc(strlen(key) * sizeof(char) +1);
     if (tmp->next->data->key == NULL) {
         warning_msg("Neuspěsná alokace klice v htab_lookup_add",0);
+        free(tmp->next);
+        free(tmp->next->data);
         return NULL;
     }
 /*

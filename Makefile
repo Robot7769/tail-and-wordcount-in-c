@@ -32,11 +32,11 @@ wordcount.o: htab.h wordcount.c io.c
 tail: tail.o error.o 
 	$(CC) tail.o error.o -o tail
 
-wordcountCC: wordcount-.cc
-	g++ std=c++17 -pedantic -Wall-O2 -o $@ 
+#wordcountCC: wordcount.cc
+#	g++ std=c++17 -pedantic -Wall wordcount.cc -o wordcountCC
 
 wordcount: wordcount.c  io.c libhtab.a  htab_struct.h htab.h error.h
-	$(CC) -o $@  wordcount.c -L. -lhtab
+	$(CC) -o $@  wordcount.c error.o -L. -lhtab
 
 wordcount-dynamic: wordcount.o libhtab.so  htab_struct.h htab.h error.h
 	$(CC) -o $@ wordcount.o error.o -L. -lhtab

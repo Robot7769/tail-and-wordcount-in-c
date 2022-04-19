@@ -22,6 +22,9 @@ void print_htab(htab_pair_t *data) {
 int main() {
     //fprintf(stdout,"START\n");
     htab_t *tab = htab_init(HTAB_SIZE);
+    if (tab == NULL) {
+        error_exit("Nastla chyba při vytváření tabulky\n");
+    }
     //fprintf(stdout,"Htab init\n");
     FILE *file = stdin;
     char word[127];  
@@ -32,6 +35,10 @@ int main() {
         //printf("dostal jsem slovo: %s\n", word);
         //fprintf(stdout,"čtení\n");
         htab_pair_t *data = htab_lookup_add(tab,word);
+        if (data == NULL) {
+            htab_free(tab);
+            error_exit("Nastla chyba Alokace\n");
+        }
         //printf("ptr: %p -data\n", (void *) data);
         //printf("\n%s slovo\n", data->key);
         data->value += 1;
