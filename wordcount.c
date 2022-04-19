@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define HTAB_SIZE 20
+#define HTAB_SIZE 10
 
 void print_htab(htab_pair_t *data) {
     fprintf(stdout, "%s\t%d\n",data->key,data->value);

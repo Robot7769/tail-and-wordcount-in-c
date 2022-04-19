@@ -11,10 +11,13 @@
 #include "htab_struct.h"
 #include "error.h"
 
+htab_pair_t * lookup_or_add(htab_t * t, htab_key_t key);
+
 void htab_resize(htab_t *t, size_t newn) {
+    //printf("--byla zavolána resize\n");
     if (t == NULL) {
         warning_msg("htab_t * t je NULL, modul htab_resize",0);
-        return NULL;
+        return;
     }
     if (t->arr_size == 0 || t->arr_ptr == NULL) {
         return;
@@ -43,12 +46,14 @@ void htab_resize(htab_t *t, size_t newn) {
             }
         }
     }
+    htab_clear(t);
+    t->size = new->size;
+    t->arr_size = new->arr_size;
+    if (t->arr_ptr != NULL) {
+        free(t->arr_ptr);
+    }
+    t->arr_ptr = new->arr_ptr;
     //zavolta clear 
-    //smazeat **na arr_ptr
-    //
-
-
-    //TODO ^^^^^
-    warning_msg("TODO",0); //!Dodělat
+    //smazat **na arr_ptr
     return;
 }
