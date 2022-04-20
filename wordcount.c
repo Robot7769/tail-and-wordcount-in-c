@@ -13,7 +13,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define HTAB_SIZE 15706
+#define HTAB_SIZE 16384
+//16384 je 2^14 je lepší obětovat kus paměti, než výpočetního výkonu.
+//2^n je zdůvodu resize na 2-násobně menší/vetší, funkce htab_resize je ale i ošetřen na resize na liché číslo.
+//Pro malé soubory je obtimální klidně in číslo 70.
+//testovánáno tak, aby byl kód optimálně rychlý a nealokoval (realocoval) mockrát při standartně velkých souborech  
 
 void print_htab(htab_pair_t *data) {
     fprintf(stdout, "%s\t%d\n",data->key,data->value);
