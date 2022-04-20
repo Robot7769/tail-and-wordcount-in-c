@@ -14,8 +14,6 @@
 htab_pair_t * lookup_or_add(htab_t * t, htab_key_t key);
 
 void htab_resize(htab_t *t, size_t newn) {
-    //return;
-    //printf("--byla zavolána resize\n");
     if (t == NULL) {
         warning_msg("htab_t * t je NULL, modul htab_resize",0);
         return;
@@ -27,13 +25,9 @@ void htab_resize(htab_t *t, size_t newn) {
     size_t j = 0;
     for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
         htab_item_t *tmp = t->arr_ptr[i];
-        //printf("each-1\n");
         if (t->arr_ptr[i] != NULL) {
-            //printf(" --each-- ");
             for (; j < t->size; j++) {
-                //printf("each00\n");
                 if (tmp->data != NULL) {
-                    //printf("each01\n");
                     htab_pair_t *new_data = htab_lookup_add(new,tmp->data->key);
                     if (new_data == NULL) {
                         htab_free(t);
@@ -65,7 +59,5 @@ void htab_resize(htab_t *t, size_t newn) {
     }
     t->arr_ptr = new->arr_ptr;
     free(new);
-    //zavolta clear 
-    //smazat **na arr_ptr
     return;
 }
