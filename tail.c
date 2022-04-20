@@ -45,12 +45,10 @@ int main(int argc, char const *argv[]) {
                     i = argc;
                 }
             } else {
-                for (size_t j = 0; j < strlen(argv[i]); j++) {
-                    if (argv[i][j] == '.') {
-                        soubor = argv[i];
-                        valid_arg = true;
-                        break;
-                    }
+                if (argv[i][0] != '-') {
+                    soubor = argv[i];
+                    valid_arg = true;
+                    break;
                 }
             }
             if (!valid_arg) {
@@ -64,7 +62,7 @@ int main(int argc, char const *argv[]) {
     } else {
         f = fopen(soubor,"r");
         if (f == NULL) {
-            error_exit("Soubor \"%s\"se nepodařilo otevřít\n",soubor);
+            error_exit("Soubor \"%s\" se nepodařilo otevřít\n",soubor);
         }
     }
     char *radek = NULL;
@@ -72,7 +70,7 @@ int main(int argc, char const *argv[]) {
     char **vypis = (char **) malloc((n_line) * sizeof(char *));
     if (vypis == NULL) {
         fclose(f);
-        error_exit("Nrpodařilase alokace\n",0);
+        error_exit("Nrpodařila se alokace\n",0);
     }
 
     for (int i = 0; i < n_line; i++) {
