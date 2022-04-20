@@ -12,7 +12,7 @@
 #define __HTAB_H__
 
 #define AVG_LEN_MIN 1
-#define AVG_LEN_MAX 3
+#define AVG_LEN_MAX 7
 
 #include <string.h>     // size_t
 #include <stdbool.h>    // bool

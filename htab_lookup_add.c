@@ -109,8 +109,8 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
 
     t->size += 1;
     if (t->size / t->arr_size > AVG_LEN_MAX) {
-        //printf("call resize\n");
+        printf("call resize\n");
         htab_resize(t,(t->size)*2);
     }
-    return tmp->next->data;
+    return htab_find(t,key);    //tmp->next->data;
 }

@@ -17,7 +17,7 @@ bool err_long_word = false;
 int read_word(char *s, int max, FILE *f) {
     //printf("čtení slova start\n");
     //char word[max];
-    int znak;
+    int znak = 0;
     for (int i = 0; i < max-1; i++) {
         //printf("for\n");
         znak = fgetc(f);

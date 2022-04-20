@@ -14,6 +14,7 @@
 htab_pair_t * lookup_or_add(htab_t * t, htab_key_t key);
 
 void htab_resize(htab_t *t, size_t newn) {
+    //return;
     //printf("--byla zavolána resize\n");
     if (t == NULL) {
         warning_msg("htab_t * t je NULL, modul htab_resize",0);
@@ -53,6 +54,7 @@ void htab_resize(htab_t *t, size_t newn) {
         free(t->arr_ptr);
     }
     t->arr_ptr = new->arr_ptr;
+    free(new);
     //zavolta clear 
     //smazat **na arr_ptr
     return;
