@@ -21,7 +21,6 @@ void htab_clear(htab_t * t) { //! nemá mazet celou arr_ptr ale jen smazat slova
         return;
     }
 
-    
     for (size_t i = 0; i < t->arr_size; i++) {
         while (t->arr_ptr[i] != NULL) {
             if (t->arr_ptr[i]->data->key != NULL) {
@@ -42,27 +41,3 @@ void htab_clear(htab_t * t) { //! nemá mazet celou arr_ptr ale jen smazat slova
     }
     return;
 } 
-/*
-if (tmp->next != NULL) {
-                tmp = tmp->next;
-                for (; j < t->size; j++) {
-                    //free(tmp_prev->data->key);
-                    if (tmp_prev->data->key != NULL) {
-                        free((void *)tmp_prev->data->key);
-                    }
-                    if (tmp_prev->data != NULL) {
-                        free(tmp_prev->data);
-                    }
-                    tmp_prev = NULL;
-                    tmp_prev = tmp;
-                    if (tmp->next != NULL) {
-                        tmp = tmp->next;
-                    } else {
-                        break;
-                    }
-                }
-            }
-            if (tmp != NULL) {
-                free(tmp);
-            }
-            */

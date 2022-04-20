@@ -22,7 +22,6 @@ htab_pair_t * htab_find(htab_t * t, htab_key_t key) {
 
     size_t j = 0;
     size_t index = (htab_hash_function(key) % t->arr_size);
-    //printf("find_index: %ld\n", index);
     htab_item_t *tmp = t->arr_ptr[index];
     for (; j < t->size; j++) {
         if (tmp != NULL) {
