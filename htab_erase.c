@@ -37,10 +37,7 @@ bool htab_erase(htab_t * t, htab_key_t key) {
             }
             return true;
         }
-
         tmp  = tmp->next;
-
     }
-
     return false;
 }
