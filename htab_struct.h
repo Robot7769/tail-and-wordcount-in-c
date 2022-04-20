@@ -24,5 +24,4 @@ struct htab {
     htab_item_t **arr_ptr;
 };
 
-
 #endif
