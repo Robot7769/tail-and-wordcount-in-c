@@ -13,7 +13,8 @@
 
 size_t htab_size(const htab_t * t) {
     if (t == NULL) {
-        error_exit("htab_t * t je NULL, modulu htab_size",0);
+        warning_msg("htab_t * t je NULL, modulu htab_size",0);
+        return 0;
     }
     return t->size;
 }

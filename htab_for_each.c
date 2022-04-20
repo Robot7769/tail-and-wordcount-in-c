@@ -13,7 +13,8 @@
 
 void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data)) {
     if (t == NULL) {
-        error_exit("htab_t * t je NULL, modul htab_for_each",0);
+        warning_msg("htab_t * t je NULL, modul htab_for_each",0);
+        return;
     }
     if (t->arr_size == 0 || t->arr_ptr == NULL) {
         return;

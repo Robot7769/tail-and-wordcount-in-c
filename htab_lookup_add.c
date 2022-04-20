@@ -36,11 +36,14 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
         }
         t->arr_ptr[index]->data = malloc(sizeof(htab_pair_t));
         if (t->arr_ptr[index]->data == NULL) {
+            free(t->arr_ptr[index]);
             warning_msg("Neuspěsná alokace htab_pair_t v htab_lookup_add",0);
             return NULL;
         }
         t->arr_ptr[index]->data->key = malloc(strlen(key) * sizeof(char) +1);
         if (t->arr_ptr[index]->data->key == NULL) {
+            free(t->arr_ptr[index]->data);
+            free(t->arr_ptr[index]);
             warning_msg("Neuspěsná alokace klice v htab_lookup_add",0);
             return NULL;
         }
@@ -73,8 +76,8 @@ htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
     tmp->next->data->key = malloc(strlen(key) * sizeof(char) +1);
     if (tmp->next->data->key == NULL) {
         warning_msg("Neuspěsná alokace klice v htab_lookup_add",0);
-        free(tmp->next);
         free(tmp->next->data);
+        free(tmp->next);
         return NULL;
     }
 

@@ -23,8 +23,8 @@ void htab_resize(htab_t *t, size_t newn) {
     }
     htab_t *new = htab_init(newn);
     if (new == NULL) {
-        htab_free(t);
-        error_exit("Nepodařilo se změnit velikost při resize");
+        warning_msg("Nepodařilo se změnit velikost při resize");
+        return;
     }
     size_t j = 0;
     for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
@@ -34,16 +34,16 @@ void htab_resize(htab_t *t, size_t newn) {
                 if (tmp->data != NULL) {
                     htab_pair_t *new_data = htab_lookup_add(new,tmp->data->key);
                     if (new_data == NULL) {
-                        htab_free(t);
                         htab_free(new);
-                        error_exit("Nepodařilo se přesunot prvek při resize");
+                        warning_msg("Nepodařilo se přesunot prvek při resize");
+                        return;
                     }
                     
                     htab_pair_t *old_data = htab_find(t, new_data->key);
                     if (old_data == NULL) {
-                        htab_free(t);
                         htab_free(new);
-                        error_exit("Nepodařilo se přesunot prvek při resize");
+                        warning_msg("Nepodařilo se přesunot prvek při resize");
+                        return;
                     }
                     new_data->value = old_data->value;                      //okopíruje hodnotu klíče ze staré tabulky
                 }
