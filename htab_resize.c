@@ -22,6 +22,10 @@ void htab_resize(htab_t *t, size_t newn) {
         return;
     }
     htab_t *new = htab_init(newn);
+    if (new == NULL) {
+        htab_free(t);
+        error_exit("Nepodařilo se změnit velikost při resize");
+    }
     size_t j = 0;
     for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
         htab_item_t *tmp = t->arr_ptr[i];
