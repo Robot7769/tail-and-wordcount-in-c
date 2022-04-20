@@ -21,6 +21,10 @@ int main(int argc, char const *argv[]) {
     char const *soubor = NULL;
     int n_line = 10;
 
+    if (argc > 4) {
+        error_exit("Příliš mnoho artumentů\n",0);
+    }
+
     if (argc >= 2) { // není zadý přepínač pouze soubor
         for (int i = 1; i < argc; i++) {
             bool valid_arg = false;
@@ -48,7 +52,6 @@ int main(int argc, char const *argv[]) {
                 if (argv[i][0] != '-') {
                     soubor = argv[i];
                     valid_arg = true;
-                    break;
                 }
             }
             if (!valid_arg) {
