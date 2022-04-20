@@ -21,6 +21,7 @@ io.o: io.c
 
 libhtab.a: $(MODULES)
 	ar -crs libhtab.a $^ error.o
+	ranlib $@
 
 libhtab.so: $(MODULES)
 	$(CC) -fPIC -shared  $^ -o $@ 
