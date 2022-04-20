@@ -35,9 +35,9 @@ void htab_resize(htab_t *t, size_t newn) {
                 if (tmp->data != NULL) {
                     //printf("each01\n");
                     htab_pair_t *new_data = htab_lookup_add(new,tmp->data->key);
-                    //printf("ptr: %p -data\n", (void *) data);
-                    //printf("\n%s slovo\n", data->key);
-                    new_data->value += 1;
+
+                    htab_pair_t *old_data = htab_find(t, new_data->key);
+                    new_data->value = old_data->value;                      //okopíruje hodnotu klíče ze staré tabulky
                 }
                 if (tmp->next != NULL) {
                     tmp = tmp->next;
