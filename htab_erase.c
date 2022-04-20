@@ -19,19 +19,40 @@ bool htab_erase(htab_t * t, htab_key_t key) {
     if (t->arr_size == 0 || t->arr_ptr == NULL) {
         return false;
     }
+
+    size_t index = (htab_hash_function(key) % t->arr_size);
+    htab_item_t *tmp = t->arr_ptr[index];
+    while (tmp != NULL) {
+        if (!strcmp(tmp->data->key, key)) {
+            htab_item_t *tmp_prev = tmp;
+            if (tmp->data->key != NULL) {
+                free((void *)tmp->data->key);
+            }
+            if (tmp->data != NULL) {
+                free(tmp->data);
+            }
+            if (tmp_prev != NULL) {
+                free(tmp_prev);
+            }
+            return true;
+        }
+
+        tmp  = tmp->next;
+
+    }
+    /*
     size_t j = 1;
     for (size_t i = 0; i < t->arr_size; i++) { //! potřeba opravit, pomocí klíče nemusím procházet celou strukturu
-        htab_item_t *tmp = t->arr_ptr[i];
         if (tmp->data->key == key) {
             t->arr_ptr[i] = tmp->next;
             //free(tmp->data->key);
             free(tmp->data);
+            t->arr_ptr[i] = tmp->next;
             free(tmp);
-            if (--(t->size) / t->arr_size < AVG_LEN_MIN) {
+            (t->size)--;
+            if (t->size / t->arr_size < AVG_LEN_MIN) {
                 htab_resize(t,(size_t) (t->size/2) + (t->size%2));
-            } else {
-                (t->size)--;
-            }
+            } 
             return true;
         }
         htab_item_t *tmp_prev = tmp;
@@ -42,11 +63,11 @@ bool htab_erase(htab_t * t, htab_key_t key) {
                     tmp_prev = tmp->next;
                     //free(tmp->data->key);
                     free(tmp->data);
+                    tmp_prev = tmp->next;
                     free(tmp);
-                    if (--(t->size) / t->arr_size < AVG_LEN_MIN) {
+                    (t->size)--;
+                    if (t->size / t->arr_size < AVG_LEN_MIN) {
                         htab_resize(t,(size_t) (t->size/2) + (t->size%2));
-                    } else {
-                        (t->size)--;
                     }
                     return true;
                 }
@@ -57,6 +78,6 @@ bool htab_erase(htab_t * t, htab_key_t key) {
                 }
             }
         }
-    }
+    }*/
     return false;
 }
